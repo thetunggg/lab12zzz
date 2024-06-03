@@ -1,28 +1,80 @@
-<!-- index.ejs -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <title>Star Wars Quote App</title>
+        <!-- Link to external CSS file (if you have one) -->
+        <!-- <link rel="stylesheet" href="/path/to/your/styles.css" /> -->
+
+        <!-- Quick inline CSS for demonstration -->
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #a8a7ae;
+                color: #0a0c0b;
+                padding: 20px;
+                
+            }
+            h1, h2 {
+                color: #2c3e50;
+                text-align: center;
+            }
+            form {
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            input[type="text"] {
+                padding: 10px;
+                margin-right: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            button {
+                padding: 10px 20px;
+                background-color: #2980b9;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #3498db;
+            }
+            .quotes {
+                list-style-type: none;
+                padding: 0;
+            }
+            .quote {
+                background-color: white;
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .quote span {
+                display: block;
+            }
+            .quote span:first-child {
+                font-weight: bold;
+            }
+        </style>
     </head>
 
     <body>
-        <h1>CREATE: May Node and Express be with you.</h1>
+        <h1>Toys Baby Products List </h1>
         
         <!-- (1): CREATE Task -->         
-        <!-- --> 
         <form action="/quotes" method="POST">   
             <input type="text" placeholder="name" name="name" />        
             <input type="text" placeholder="quote" name="quote" />
             <button type="submit">Submit</button>
         </form>
-        <!-- -->                               
 
         <!-- (2) READ Task -->                        
-        <h2> READ: All Quotes in Database </h2>
+        <h2>Data List</h2>
         <ul class="quotes">
             <!-- Loop through quotes -->
-            <% for(var i = 0; i < quotes.length; i++) {%>
+            <% for(var i = 0; i < quotes.length; i++) { %>
                 <li class="quote">
                     <!-- Output name from the iterated quote object -->
                     <span><%= quotes[i].name %></span>:
@@ -30,8 +82,17 @@
                     <span><%= quotes[i].quote %></span>
                 </li>
             <% } %>
-        </ul>    
-    
-    </body>
+        </ul>
 
+        <!-- External JavaScript file (if you have one) -->
+        <!-- <script src="/path/to/your/scripts.js"></script> -->
+
+        <!-- Inline JavaScript for demonstration -->
+        <script>
+            // Example: Alert when form is submitted
+            document.querySelector('form').addEventListener('submit', function(event) {
+                alert('Quote submitted!');
+            });
+        </script>
+    </body>
 </html>
