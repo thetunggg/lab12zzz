@@ -2,97 +2,115 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Star Wars Quote App</title>
-        <!-- Link to external CSS file (if you have one) -->
-        <!-- <link rel="stylesheet" href="/path/to/your/styles.css" /> -->
-
-        <!-- Quick inline CSS for demonstration -->
+        <title>Baby Toys</title>
         <style>
             body {
-                font-family: Arial, sans-serif;
-                background-color: #a8a7ae;
-                color: #0a0c0b;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #e0e0e0;
+                color: #333;
                 padding: 20px;
-                
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+            .container {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                max-width: 600px;
+                width: 100%;
             }
             h1, h2 {
-                color: #2c3e50;
+                color: #444;
                 text-align: center;
+                margin: 0 0 20px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             }
             form {
                 margin-bottom: 20px;
                 text-align: center;
             }
             input[type="text"] {
-                padding: 10px;
+                padding: 12px;
                 margin-right: 10px;
                 border: 1px solid #ccc;
                 border-radius: 5px;
+                background-color: #f9f9f9;
+                width: calc(50% - 22px);
             }
             button {
-                padding: 10px 20px;
-                background-color: #2980b9;
+                padding: 12px 25px;
+                background-color: #607d8b;
                 color: white;
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
+                transition: background-color 0.3s ease;
             }
             button:hover {
-                background-color: #3498db;
+                background-color: #455a64;
             }
             .quotes {
                 list-style-type: none;
                 padding: 0;
+                margin: 0;
             }
             .quote {
-                background-color: white;
-                padding: 10px;
-                margin-bottom: 10px;
+                background-color: #f5f5f5;
+                padding: 20px;
+                margin-bottom: 15px;
                 border-radius: 5px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                position: relative;
             }
             .quote span {
                 display: block;
             }
             .quote span:first-child {
                 font-weight: bold;
+                color: #607d8b;
+                margin-bottom: 5px;
+            }
+            .quote form {
+                position: absolute;
+                top: 15px;
+                right: 15px;
             }
         </style>
     </head>
 
     <body>
-        <h1>Toys Baby Products List </h1>
-        
-        <!-- (1): CREATE Task -->         
-        <form action="/quotes" method="POST">   
-            <input type="text" placeholder="name" name="name" />        
-            <input type="text" placeholder="quote" name="quote" />
-            <button type="submit">Submit</button>
-        </form>
+        <div class="container">
+            <h1>Baby Toys</h1>
 
-        <!-- (2) READ Task -->                        
-        <h2>Data List</h2>
-        <ul class="quotes">
-            <!-- Loop through quotes -->
-            <% for(var i = 0; i < quotes.length; i++) { %>
+            <!-- (1): CREATE Task -->
+            <div class="form-container">
+                <form action="/quotes" method="POST">
+                    <input type="text" placeholder="Name" name="name" required />
+                    <input type="text" placeholder="Quote" name="quote" required />
+                    <br><button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <!-- (2) READ Task -->
+            <h2>Products</h2>
+            <ul class="quotes">
+                <!-- Loop through quotes -->
+                <% quotes.forEach(quote => { %>
                 <li class="quote">
-                    <!-- Output name from the iterated quote object -->
-                    <span><%= quotes[i].name %></span>:
-                    <!-- Output quote from the iterated quote object -->
-                    <span><%= quotes[i].quote %></span>
+                    <div>
+                        <span><%= quote.name %></span>:
+                        <span><%= quote.quote %></span>
+                    </div>
+                    <form action="/quotes/<%= quote._id %>/delete" method="POST">
+                        <button type="submit">Delete</button>
+                    </form>
                 </li>
-            <% } %>
-        </ul>
-
-        <!-- External JavaScript file (if you have one) -->
-        <!-- <script src="/path/to/your/scripts.js"></script> -->
-
-        <!-- Inline JavaScript for demonstration -->
-        <script>
-            // Example: Alert when form is submitted
-            document.querySelector('form').addEventListener('submit', function(event) {
-                alert('Quote submitted!');
-            });
-        </script>
+                <% }) %>
+            </ul>
+        </div>
     </body>
 </html>

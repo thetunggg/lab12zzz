@@ -5,7 +5,10 @@ const express = require('express');
 const bodyParser= require('body-parser')
 const app = express();
 
+
 const MongoClient = require('mongodb').MongoClient
+const ObjectID = require('mongodb').ObjectID;
+
 
 const connectionString = 'mongodb+srv://tungttgcs210739:tung1234@cluster0.qf1hwuj.mongodb.net/'
 
@@ -62,11 +65,17 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
              })
             .catch(error => console.error(error))
         })
-        
-        // server -> listen -> port -> 3000
-        app.listen(3000, function() {
-            console.log('listening on 3000')
+  // Delete route
+  app.post('/quotes/:id/delete', (req, res) => {
+    const quoteId = req.params.id;
+    quotesCollection.deleteOne({ _id: new ObjectID(quoteId) })
+        .then(result => {
+            res.redirect('/')
         })
+        .catch(error => console.error(error))
+})
+    // Start the server
+    app.listen(3000, () => {
+    console.log('Server is running on port 3000');
     })
-
-
+});
